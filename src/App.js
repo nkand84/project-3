@@ -11,7 +11,6 @@ class App extends Component {
 
         
         <Video />
-        <ModalVideo> </ModalVideo>
       </div>
     );
   }

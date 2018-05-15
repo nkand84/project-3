@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import YouTube from 'react-youtube';
-// import Modal from '../Modal/ModalVideo';
+import ModalVideo from '../Modal/ModalVideo';
 
 let youTubeTimer;
 
 class Video extends Component {
 
   state = {
-    ct: 0
+    ct: 0,
+    pause: 0,
+    openModal: false
   };
 
   round = (number, precision) => {
@@ -20,9 +22,12 @@ class Video extends Component {
 
   _onPlay = (event) => {
     // access to player in all event handlers via event.target
-    const stoppingPoints = [5, 10, 15, 18];
+    const stoppingPoints = [5.1, 10.1, 15.1, 18.1];
+    this.setState({
+      openModal: false
+    });
     youTubeTimer = setInterval(() => {
-      console.log(this.round(event.target.getCurrentTime(), 1));
+      // console.log(this.round(event.target.getCurrentTime(), 1));
       if (this.round(event.target.getCurrentTime(), 1) === stoppingPoints[this.state.ct]){ 
         this.setState({
           ct: this.state.ct + 1
@@ -30,15 +35,25 @@ class Video extends Component {
         event.target.pauseVideo();
       }
     }, 100); 
+    this.setState({
+      pause: 0
+    })
+    console.log("Pause on Play: " + this.state.pause);
   }
 
   _onPause = (event) => {
     clearInterval(youTubeTimer);
+    this.setState({
+      pause: 1,
+      openModal: true
+    });
+    console.log("Pause on Pause: " + this.state.pause);
   }
 
   _onEnd = (event) => {
     this.setState({
-      ct: 0
+      ct: 0,
+      openModal: false
     });
     clearInterval(youTubeTimer);
   }
@@ -55,14 +70,19 @@ class Video extends Component {
     };
  
     return (
-      <YouTube
-        videoId="2g811Eo7K8U"
-        opts={opts}
-        onReady={this._onReady}
-        onPlay={this._onPlay}
-        onPause={this._onPause}
-        onEnd={this._onEnd}
-      />  
+      <div>
+        <YouTube
+          videoId="2g811Eo7K8U"
+          opts={opts}
+          onReady={this._onReady}
+          onPlay={this._onPlay}
+          onPause={this._onPause}
+          onEnd={this._onEnd}
+        />
+        {
+          (this.state.openModal) ? <ModalVideo/> : ""
+        }
+      </div>
     );
   }
 }

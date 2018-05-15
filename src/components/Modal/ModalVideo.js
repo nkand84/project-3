@@ -24,9 +24,16 @@ const customStyles = {
         modalIsOpen: false
       };
    
-      // this.openModal = this.openModal.bind(this);
+      this.openModal = this.openModal.bind(this);
       this.afterOpenModal = this.afterOpenModal.bind(this);
       this.closeModal = this.closeModal.bind(this);
+    }
+
+    componentDidMount() {
+      // this.openModal(true)
+      this.setState({
+        modalIsOpen: true
+      });
     }
    
     openModal = () => {
@@ -45,11 +52,11 @@ const customStyles = {
     render() {
       return (
         <div>
-          <button onClick={this.openModal}>Open Modal</button>
           <Modal
             isOpen={this.state.modalIsOpen}
             onAfterOpen={this.afterOpenModal}
             onRequestClose={this.closeModal}
+            // onRequestOpen={this.props.openModal}
             style={customStyles}
             contentLabel="Example Modal"
           >
