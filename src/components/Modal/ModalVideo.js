@@ -24,12 +24,12 @@ const customStyles = {
         modalIsOpen: false
       };
    
-      this.openModal = this.openModal.bind(this);
+      // this.openModal = this.openModal.bind(this);
       this.afterOpenModal = this.afterOpenModal.bind(this);
       this.closeModal = this.closeModal.bind(this);
     }
    
-    openModal() {
+    openModal = () => {
       this.setState({modalIsOpen: true});
     }
    

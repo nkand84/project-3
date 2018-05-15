@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Video from './components/Video/Video';
 import Example from './components/Video/Videotest';
-import ModalVideo from './components/Modal/Modal';
-
+import ModalVideo from './components/Modal/ModalVideo';
 
 class App extends Component {
   render() {

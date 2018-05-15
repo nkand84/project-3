@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import YouTube from 'react-youtube';
-
+// import Modal from '../Modal/ModalVideo';
 
 let youTubeTimer;
 
@@ -62,7 +62,7 @@ class Video extends Component {
         onPlay={this._onPlay}
         onPause={this._onPause}
         onEnd={this._onEnd}
-      />
+      />  
     );
   }
 }
