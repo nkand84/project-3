@@ -8,7 +8,6 @@ class Video extends Component {
 
   state = {
     ct: 0,
-    pause: 0,
     openModal: false
   };
 
@@ -35,19 +34,13 @@ class Video extends Component {
         event.target.pauseVideo();
       }
     }, 100); 
-    this.setState({
-      pause: 0
-    })
-    console.log("Pause on Play: " + this.state.pause);
   }
 
   _onPause = (event) => {
     clearInterval(youTubeTimer);
     this.setState({
-      pause: 1,
       openModal: true
     });
-    console.log("Pause on Pause: " + this.state.pause);
   }
 
   _onEnd = (event) => {
