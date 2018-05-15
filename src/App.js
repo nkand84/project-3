@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
 import Video from './components/Video/Video';
-// import Modal from './components/Modal/Modal';
+import Example from './components/Video/Videotest';
+import ModalVideo from './components/Modal/Modal';
+
 
 class App extends Component {
   render() {
     return (
-     <Video />
-     
+      <div id="main">
+
+        
+        <Video />
+        <ModalVideo> </ModalVideo>
+      </div>
     );
   }
 }

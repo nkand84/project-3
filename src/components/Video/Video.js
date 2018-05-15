@@ -21,25 +21,16 @@ class Video extends Component {
   _onPlay = (event) => {
     // access to player in all event handlers via event.target
     const stoppingPoints = [5, 10, 15, 18];
-    // youTubeTimer = setInterval(() => {
-    //   console.log(this.round(event.target.getCurrentTime(), 1));
-    //   console.log(event.target.getCurrentTime())
-    //    if (this.round(event.target.getCurrentTime(), 1) === stoppingPoints[this.state.ct]){
-    //     // if (event.target.getCurrentTime() >= stoppingPoints[this.state.ct]){
-    //     this.setState({
-    //       ct: this.state.ct + 1
-    //     });
-
-    //     event.target.pauseVideo();
-    //   }
-    // }, 100);
-
     youTubeTimer = setInterval(() => {
-          event.target.pauseVideo();
-          console.log(event.target.getCurrentTime())
-        }
-      , 5000); 
-    }
+      console.log(this.round(event.target.getCurrentTime(), 1));
+      if (this.round(event.target.getCurrentTime(), 1) === stoppingPoints[this.state.ct]){ 
+        this.setState({
+          ct: this.state.ct + 1
+        });
+        event.target.pauseVideo();
+      }
+    }, 100); 
+  }
 
   _onPause = (event) => {
     clearInterval(youTubeTimer);
