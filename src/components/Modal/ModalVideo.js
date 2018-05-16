@@ -21,7 +21,8 @@ const customStyles = {
       super();
    
       this.state = {
-        modalIsOpen: false
+        modalIsOpen: false,
+        selectedOption: 0
       };
    
       this.openModal = this.openModal.bind(this);
@@ -49,6 +50,26 @@ const customStyles = {
       this.setState({modalIsOpen: false});
     }
    
+    submitForm = (event, props) => {
+      var letterArray = [" A"," B"," C"," D"]
+      console.log(this.props);
+      if (this.props.answer == this.state.selectedOption)
+      {
+        alert("Correct Answer!");
+      }
+      else {
+        alert("False, the correct answer was" + letterArray[this.props.answer -1]);
+      }
+      
+    }
+  
+    handleOptionChange =  changeEvent => {
+      this.setState({
+        selectedOption: changeEvent.target.value
+      });
+      console.log("change event target: " + changeEvent.target.value)
+    }
+
     render() {
       return (
         <div>
@@ -68,25 +89,22 @@ const customStyles = {
               <fieldset>
                 <legend>Radio buttons</legend>
                 <label>
-                  <input id="radio-a" name="radios" type="radio" /> A: {this.props.answerChoiceOne}
+                  <input id="radio-a" name="radios" type="radio" value='1' checked={this.state.selectedOption === '1'} onChange={this.handleOptionChange}/> A: {this.props.answerChoiceOne}
                 </label>
                 <br />
                 <label>
-                  <input id="radio-b" name="radios" type="radio" /> B: {this.props.answerChoiceTwo}
+                  <input id="radio-b" name="radios" type="radio" value='2' checked={this.state.selectedOption === '2'} onChange={this.handleOptionChange}/> B: {this.props.answerChoiceTwo}
                 </label>
                 <br />
                 <label>
-                  <input id="radio-c" name="radios" type="radio" /> C: {this.props.answerChoiceThree}
+                  <input id="radio-c" name="radios" type="radio" value='3' checked={this.state.selectedOption === '3'} onChange={this.handleOptionChange}/> C: {this.props.answerChoiceThree}
                 </label>
                 <br />
                 <label>
-                  <input id="radio-d" name="radios" type="radio" /> D: {this.props.answerChoiceFour}
+                  <input id="radio-d" name="radios" type="radio" value='4' checked={this.state.selectedOption === '4'} onChange={this.handleOptionChange}/> D: {this.props.answerChoiceFour}
                 </label>
               </fieldset>
-              <fieldset>
-                <input type="text" />
-                <input type="text" />
-              </fieldset>
+              <button type="button" className="btn btn-primary" onClick={this.submitForm} id="Submit Button">Submit</button>
             </form>
            
           </Modal>
