@@ -29,7 +29,8 @@ class Video extends Component {
       // console.log(this.round(event.target.getCurrentTime(), 1));
       if (this.round(event.target.getCurrentTime(), 1) === stoppingPoints[this.state.ct]){ 
         this.setState({
-          ct: this.state.ct + 1
+          ct: this.state.ct + 1,
+          openModal: true
         });
         event.target.pauseVideo();
       }
@@ -38,9 +39,6 @@ class Video extends Component {
 
   _onPause = (event) => {
     clearInterval(youTubeTimer);
-    this.setState({
-      openModal: true
-    });
   }
 
   _onEnd = (event) => {
