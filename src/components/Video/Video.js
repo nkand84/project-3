@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import YouTube from 'react-youtube';
 import ModalVideo from '../Modal/ModalVideo';
+import questions from '../../questions.json';
 
 let youTubeTimer;
 
@@ -8,7 +9,9 @@ class Video extends Component {
 
   state = {
     ct: 0,
-    openModal: false
+    openModal: false,
+    Questions: questions,
+    questionCount: -1
   };
 
   round = (number, precision) => {
@@ -27,14 +30,16 @@ class Video extends Component {
     });
     youTubeTimer = setInterval(() => {
       // console.log(this.round(event.target.getCurrentTime(), 1));
-      if (this.round(event.target.getCurrentTime(), 1) === stoppingPoints[this.state.ct]){ 
+      if (this.round(event.target.getCurrentTime(), 1) === stoppingPoints[this.state.ct]){
         this.setState({
           ct: this.state.ct + 1,
-          openModal: true
+          openModal: true,
+          questionCount: this.state.questionCount + 1
         });
         event.target.pauseVideo();
       }
     }, 100); 
+    // console.log("Question Count: " + this.state.questionCount);
   }
 
   _onPause = (event) => {
@@ -70,8 +75,21 @@ class Video extends Component {
           onPause={this._onPause}
           onEnd={this._onEnd}
         />
+        {/* {console.log("Checking question count again: " + this.state.questionCount)} */}
         {
-          (this.state.openModal) ? <ModalVideo/> : ""
+          // this.state.Questions.map(quest => (
+            (this.state.openModal) ? <ModalVideo
+              key={this.state.Questions[this.state.questionCount].id}
+              id={this.state.Questions[this.state.questionCount].id}
+              question={this.state.Questions[this.state.questionCount].question}
+              answerChoiceOne={this.state.Questions[this.state.questionCount].answerChoiceOne}
+              answerChoiceTwo={this.state.Questions[this.state.questionCount].answerChoiceTwo}
+              answerChoiceThree={this.state.Questions[this.state.questionCount].answerChoiceThree}
+              answerChoiceFour={this.state.Questions[this.state.questionCount].answerChoiceFour}
+              answer={this.state.Questions[this.state.questionCount].answer}
+            /> : ""
+          // ))
+
         }
       </div>
     );
