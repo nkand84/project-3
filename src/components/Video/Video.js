@@ -34,7 +34,7 @@ class Video extends Component {
         this.setState({
           ct: this.state.ct + 1,
           openModal: true,
-          questionCount: this.state.questionCount + 1
+          questionCount: this.state.questionCount + 1       
         });
         event.target.pauseVideo();
       }
@@ -49,7 +49,8 @@ class Video extends Component {
   _onEnd = (event) => {
     this.setState({
       ct: 0,
-      openModal: false
+      openModal: false,
+      questionCount: -1
     });
     clearInterval(youTubeTimer);
   }
