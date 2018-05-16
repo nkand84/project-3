@@ -56,7 +56,6 @@ const customStyles = {
             isOpen={this.state.modalIsOpen}
             onAfterOpen={this.afterOpenModal}
             onRequestClose={this.closeModal}
-            // onRequestOpen={this.props.openModal}
             style={customStyles}
             contentLabel="Example Modal"
           >
